@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NozzleQuiz.Integrations.NozzleSoft.Client.InventoryManagement;
+using NozzleQuiz.Integrations.NozzleSoft;
+using NozzleQuiz.Integrations.NozzleSoft.Models.Requests;
 using System.Threading.Tasks;
 
 namespace NozzleQuiz.WebApi.Controllers
@@ -8,17 +9,12 @@ namespace NozzleQuiz.WebApi.Controllers
     [ApiController]
     public class OAuthController : ControllerBase
     {
-        private readonly IMaterialCategory materialCategory;
-
-        public OAuthController(IMaterialCategory materialCategory)
-        {
-            this.materialCategory = materialCategory;
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> LoginAsync([FromQuery] LoginRequest m)
         {
-            var result = await materialCategory.GetAllMaterialCategory();
+            var provider = new NozzleClient();
+            var result = await provider.AccountApi.LoginAsync(m);
+
             return Ok(result);
         }
     }

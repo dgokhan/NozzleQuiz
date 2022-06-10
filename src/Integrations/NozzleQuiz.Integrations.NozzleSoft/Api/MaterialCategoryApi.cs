@@ -5,23 +5,11 @@ using System.Threading.Tasks;
 
 namespace NozzleQuiz.Integrations.NozzleSoft.Api
 {
-    public interface IMaterialCategoryApi
+    public class MaterialCategoryApi : BaseApi
     {
-        Task<MaterialCategoryGetAllResponse> GetAllMaterialCategory();
-    }
-
-    public class MaterialCategoryApi : IMaterialCategoryApi
-    {
-        private readonly IBaseApi baseApi;
-
-        public MaterialCategoryApi(IBaseApi baseApi)
+        public async Task<MaterialCategoryGetAllResponse> GetAllMaterialCategoryAsync()
         {
-            this.baseApi = baseApi;
-        }
-
-        public async Task<MaterialCategoryGetAllResponse> GetAllMaterialCategory()
-        {
-            var response = await baseApi.GetMethodAsync(
+            var response = await BaseApi.GetMethodAsync(
                 uri: NozzleApiSettings.ApiUrl + "InventoryManagement/MaterialCategory/GetAll",
                 headers: new Dictionary<string, string> {
                     { "X-Authorization", NozzleApiSettings.AuthorizationKey },

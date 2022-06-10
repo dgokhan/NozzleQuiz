@@ -6,19 +6,9 @@ using System.Threading.Tasks;
 
 namespace NozzleQuiz.Integrations.NozzleSoft.Api
 {
-    public interface IBaseApi
+    public class BaseApi
     {
-        Task<IRestResponse<JToken>> PostMethodAsync(string uri, Dictionary<string, string> headers = null, object requestObject = null);
-
-        Task<IRestResponse<JToken>> GetMethodAsync(string uri, Dictionary<string, string> headers = null);
-
-        Task<IRestResponse<JToken>> PutMethodAsync(object requestObject, string baseUri, string uri, Dictionary<string, string> headers = null);
-
-        Task<IRestResponse<JToken>> DeleteMethodAsync(string uri, Dictionary<string, string> headers = null);
-    }
-    public class BaseApi : IBaseApi
-    {
-        public async Task<IRestResponse<JToken>> PostMethodAsync(string uri, Dictionary<string, string> headers = null, object requestObject = null)
+        public static async Task<IRestResponse<JToken>> PostMethodAsync(string uri, Dictionary<string, string> headers = null, object requestObject = null)
         {
             var client = new RestClient(uri);
             var request = new RestRequest(Method.POST) { RequestFormat = DataFormat.Json };
@@ -27,7 +17,7 @@ namespace NozzleQuiz.Integrations.NozzleSoft.Api
             return result;
         }
 
-        public async Task<IRestResponse<JToken>> GetMethodAsync(string uri, Dictionary<string, string> headers = null)
+        public static async Task<IRestResponse<JToken>> GetMethodAsync(string uri, Dictionary<string, string> headers = null)
         {
             var client = new RestClient(uri);
             var request = new RestRequest(Method.GET) { RequestFormat = DataFormat.Json };
@@ -36,7 +26,7 @@ namespace NozzleQuiz.Integrations.NozzleSoft.Api
             return result;
         }
 
-        public async Task<IRestResponse<JToken>> PutMethodAsync(object requestObject, string baseUri, string uri, Dictionary<string, string> headers = null)
+        public static async Task<IRestResponse<JToken>> PutMethodAsync(object requestObject, string baseUri, string uri, Dictionary<string, string> headers = null)
         {
             var client = new RestClient(uri);
             var request = new RestRequest(Method.PUT) { RequestFormat = DataFormat.Json };
@@ -45,7 +35,7 @@ namespace NozzleQuiz.Integrations.NozzleSoft.Api
             return result;
         }
 
-        public async Task<IRestResponse<JToken>> DeleteMethodAsync(string uri, Dictionary<string, string> headers = null)
+        public static async Task<IRestResponse<JToken>> DeleteMethodAsync(string uri, Dictionary<string, string> headers = null)
         {
             var client = new RestClient(uri);
             var request = new RestRequest(Method.DELETE) { RequestFormat = DataFormat.Json };
@@ -55,7 +45,7 @@ namespace NozzleQuiz.Integrations.NozzleSoft.Api
         }
 
 
-        private async Task<IRestResponse<JToken>> GetResultAsync(RestClient client, RestRequest request, object requestObject = null, Dictionary<string, string> headers = null)
+        private static async Task<IRestResponse<JToken>> GetResultAsync(RestClient client, RestRequest request, object requestObject = null, Dictionary<string, string> headers = null)
         {
             if (headers != null)
             {
