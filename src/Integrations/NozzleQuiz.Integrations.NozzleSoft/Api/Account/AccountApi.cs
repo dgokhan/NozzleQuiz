@@ -3,7 +3,7 @@ using NozzleQuiz.Integrations.NozzleSoft.Models.Responses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NozzleQuiz.Integrations.NozzleSoft.Api
+namespace NozzleQuiz.Integrations.NozzleSoft.Api.Account
 {
     public class AccountApi : BaseApi
     {
