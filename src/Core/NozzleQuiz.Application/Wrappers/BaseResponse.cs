@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 namespace NozzleQuiz.Application.Wrappers
 {
@@ -73,8 +72,9 @@ namespace NozzleQuiz.Application.Wrappers
         {
             try
             {
-                ICollection collection = resValue as ICollection;
-                if (resValue is not null && collection.Count is not 0)
+                // TODO: EXCP
+                // ICollection collection = resValue as ICollection;
+                if (resValue is not null)
                 {
                     return new Result<T>(true, resValue, new BaseResponse(ResponseType.OK, "No errors detected"));
                 }
@@ -86,5 +86,11 @@ namespace NozzleQuiz.Application.Wrappers
                 return new Result<T>(false, resValue, new BaseResponse(ResponseType.ExceptionError, ex.Message));
             }
         }
+
+        public static IResult<T> Problem<T>(T ex)
+        {
+            return new Result<T>(false, new BaseResponse(ResponseType.Error, ex.ToString()));
+        }
+
     }
 }

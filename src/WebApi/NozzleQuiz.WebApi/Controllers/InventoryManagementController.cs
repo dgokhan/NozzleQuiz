@@ -4,12 +4,14 @@ using System;
 using System.Threading.Tasks;
 
 namespace NozzleQuiz.WebApi.Controllers
-{
+{    
+    /// <summary>
+    /// This project use the API operations! Your data is not saved in database..
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class InventoryManagementController : ControllerBase
-    {
-        [Obsolete]
+    { 
         /// <summary>
         /// Fetch data by Integrations.NozzleSoft.MaterialCategoryApi
         /// </summary>
@@ -17,10 +19,17 @@ namespace NozzleQuiz.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> GetAllMaterialCategoryAsync()
         {
-            var provider = new NozzleClient();
-            var result = await provider.MaterialCategory.GetAllMaterialCategoryAsync();
+            try
+            {
+                var provider = new NozzleClient();
+                var result = await provider.MaterialCategory.GetAllMaterialCategoryAsync();
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         /// <summary>
@@ -31,10 +40,17 @@ namespace NozzleQuiz.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> SearchMaterialCategoryAsync(object o)
         {
-            var provider = new NozzleClient();
-            var result = await provider.MaterialCategory.SearchMaterialCategoryAsync(o);
+            try
+            {
+                var provider = new NozzleClient();
+                var result = await provider.MaterialCategory.SearchMaterialCategoryAsync(o);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         /// <summary>
@@ -45,10 +61,17 @@ namespace NozzleQuiz.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> SearchMaterialAsync(object o)
         {
-            var provider = new NozzleClient();
-            var result = await provider.Material.SearchMaterialAsync(o);
+            try
+            {
+                var provider = new NozzleClient();
+                var result = await provider.Material.SearchMaterialAsync(o);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
     }
 }

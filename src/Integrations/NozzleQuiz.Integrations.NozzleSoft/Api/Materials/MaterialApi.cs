@@ -28,8 +28,9 @@ namespace NozzleQuiz.Integrations.NozzleSoft.Api.Materials
                     materialCategoryID = item.Value<string>("materialCategoryID"),
                     code = item.Value<string>("code"),
                     name = item.Value<string>("name"),
+                    stockQuantity = item.Value<double>("stockQuantity"),
                     baseUnitTypeID = item.Value<string>("baseUnitTypeID"),
-                    stockQuantity = item.Value<double>("stockQuantity")
+                    baseUnitTypeDisplay = item.Value<string>("baseUnitTypeDisplay")
                 });
             }
 

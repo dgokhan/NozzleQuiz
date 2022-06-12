@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NozzleQuiz.Application.Interfaces.Repository;
 using NozzleQuiz.Persistence.Context;
+using NozzleQuiz.Persistence.Repository;
 
 namespace NozzleQuiz.Persistence
 {
@@ -8,9 +10,11 @@ namespace NozzleQuiz.Persistence
     {
         public static void AddPersistencecServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(@"Data Source=.;Initial Catalog=NozzleDb;Integrated Security=True"));
+            serviceCollection.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(@"Data Source=.;Initial Catalog=NozzleQuizDb;Integrated Security=True"));
 
-            //serviceCollection.AddTransient<IProductRepository, ProductRepository>();
+            serviceCollection.AddTransient<IMaterialCategoryRepository, MaterialCategoryRepository>();
+            serviceCollection.AddTransient<IMaterialRepository, MaterialRepository>(); 
+            serviceCollection.AddTransient<IBaseUnitTypeRepository, BaseUnitTypeRepository>(); 
         }
     }
 }

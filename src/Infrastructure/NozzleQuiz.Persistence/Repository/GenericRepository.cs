@@ -33,5 +33,5 @@ namespace NozzleQuiz.Persistence.Repository
         {
             return await dbContext.Set<T>().FindAsync(Id);
         }
-    }
+    } 
 }
